@@ -10,7 +10,9 @@ app = Flask(__name__)
 dic = {0 :'BrownSpot', 1 : 'Healthy',2:'Hispa', 3:'LeafBlast'}
 
 #modelresnet50dict
-model = torch.load('Entire_resnet50_model.pth', map_location=torch.device('cpu'))
+#model = torch.load('Entire_resnet50_model.pth', map_location=torch.device('cpu'))
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+model = torch.load('Entire_resnet50_model.pth', map_location=device)
 model.eval()
 
 @app.route('/predict', methods=['POST'])
